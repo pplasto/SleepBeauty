@@ -23,7 +23,7 @@ bool MainMenuView::init()
 {
 	if(UILayer::init())
 	{
-		UIWidget* mainmenu = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("MainMenu.ExportJson");
+		UIWidget* mainmenu = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("MainMenu.ExportJson");
 
 		UIButton* button = static_cast<UIButton*>(mainmenu->getChildByName("mainmenu_btn_start"));
 		button->setTouchEnabled(true);
@@ -42,7 +42,7 @@ bool MainMenuView::init()
 
 		addWidget(mainmenu);
 
-		_panelSound = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelSet.ExportJson");
+		_panelSound = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelSet.ExportJson");
 		_panelSound->retain();
 		_panelSound->setTouchEnabled(true);
 		button = static_cast<UIButton*>(_panelSound->getChildByName("Button_effect"));
@@ -112,7 +112,8 @@ void MainMenuView::eventBtn(CCObject *pSender, TouchEventType type)
 		}
 		else if(strcmp(button->getName(),"Button_close") == 0)
 		{
-			addWidget(_panelSound);
+			removeWidget(_panelSound);
+			//addWidget(_panelSound);
 		}
 	}
 }
@@ -140,7 +141,7 @@ void MainMenuView::keyBackClicked()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	JniMethodInfo minfo;
 	bool isHave = 
-	JniHelper::getStaticMethodInfo(minfo,"com/pplasto/dreambeauty/DreamBeauty",
+	JniHelper::getStaticMethodInfo(minfo,"com/goodgame/sleepBeauty/sleepBeauty",
 		"sendCloseAppMessage","()V");
 	if(isHave)
 	{

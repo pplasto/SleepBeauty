@@ -109,7 +109,7 @@ void GameRunView::_initView()
 	///////////////// PlayGroundUI
 	this->getRootWidget()->getRenderer()->setZOrder(100);
 
-	UIWidget* playGroundUI = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PlayGroundUI.ExportJson");
+	UIWidget* playGroundUI = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PlayGroundUI.ExportJson");
 	this->addWidget(playGroundUI);
 
 	_buttonBack = static_cast<UIButton*>(playGroundUI->getChildByName("Button_back"));
@@ -151,42 +151,42 @@ void GameRunView::_initView()
 	_uiTipGuide->addTouchEventListener(this,toucheventselector(GameRunView::onTouchTip));
 
 	//////////////////////PlayBeginTip/////////////////////////
-	_playBeginTipUI =  cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PlayBeginTip.ExportJson");
+	_playBeginTipUI =  (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PlayBeginTip.ExportJson");
 	_playBeginTipUI->retain();
 	/////////////////////////////// Buy ///////////////////////////////////////////
 	UIButton* button;
-	_playBuyGuide = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("BuyGuide.ExportJson");
+	_playBuyGuide = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("BuyGuide.ExportJson");
 	_playBuyGuide->retain();
 	registerButton(_playBuyGuide,"btn_more_guide_1",onTouchPayButton);
 	registerButton(_playBuyGuide,"btn_more_guide_all",onTouchPayButton);
 	_playBuyGuide->getChildByName("btn_more_guide_all")->setVisible(false); // TODO 
 	_playBuyGuide->getChildByName("btn_more_guide_all")->setTouchEnabled(false);// TODO 
 	registerButton(_playBuyGuide,"buyguide_btn_back",onTouchPayButton);
-	_playBuySleep = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("BuySleep.ExportJson");
+	_playBuySleep = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("BuySleep.ExportJson");
 	_playBuySleep->retain();
 	registerButton(_playBuySleep,"btn_more_sleep",onTouchPayButton);
 	registerButton(_playBuySleep,"buysleep_btn_back",onTouchPayButton);
-	_playBuyTime = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("BuyTime.ExportJson");
+	_playBuyTime = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("BuyTime.ExportJson");
 	_playBuyTime->retain();
 	registerButton(_playBuyTime,"btn_more_time_1",onTouchPayButton);
 	registerButton(_playBuyTime,"btn_more_time_all",onTouchPayButton);
 	registerButton(_playBuyTime,"buytime_btn_back",onTouchPayButton);
 
 	//////////////////////////// win lose ///////////////////////////////////
-	_panelWin = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelWin.ExportJson");
+	_panelWin = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelWin.ExportJson");
 	_panelWin->retain();
 	registerButton(_panelWin,"win_btn_sure",onTouchResultButton);
-	_panelLoseTime = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelLoseTimeOver.ExportJson");
+	_panelLoseTime = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelLoseTimeOver.ExportJson");
 	_panelLoseTime->retain();
 	registerButton(_panelLoseTime,"loseTime_btn_restart",onTouchResultButton);
 	registerButton(_panelLoseTime,"loseTime_btn_back",onTouchResultButton);
-	_panelLoseSleep = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelLoseSleepOver.ExportJson");
+	_panelLoseSleep = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelLoseSleepOver.ExportJson");
 	_panelLoseSleep->retain();
 	registerButton(_panelLoseSleep,"loseSleep_btn_restart",onTouchResultButton);
 	registerButton(_panelLoseSleep,"loseSleep_btn_back",onTouchResultButton);
 
 	//////////////////////////////////////////////////////////////////////////
-	_panelNewBeauty = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("BeautyCard.ExportJson");
+	_panelNewBeauty = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("BeautyCard.ExportJson");
 	_panelNewBeauty->retain();
 	_panelNewBeauty->getChildByName("img_unlock")->setVisible(true);
 	_panelNewBeauty->getChildByName("img_unlock_font")->setVisible(true);
@@ -194,11 +194,11 @@ void GameRunView::_initView()
 	//_panelNewBeauty->addTouchEventListener()
 
 	//////////////////////////////////////////////////////////////////////////
-	_panelEvilGain = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelEvilGain.ExportJson");
+	_panelEvilGain = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelEvilGain.ExportJson");
 	_panelEvilGain->retain();
 
 	//////////////////////////////////////////////////////////////////////////
-	_panelEvil = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelEvil.ExportJson");
+	_panelEvil = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelEvil.ExportJson");
 	_panelEvil->retain();
 	_panelEvil->getChildByName("PanelEvil_text_1")->setVisible(true);
 	_panelEvil->getChildByName("evil_mask_1")->setVisible(true);

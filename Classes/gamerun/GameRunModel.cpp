@@ -249,7 +249,7 @@ void GameRunModel::setState(GAMESTATE state)
 		if(_state == STATE_BEGIN)
 		{
 			_modelDelegate->noticePlay( this );
-			_modelDelegate->noticeSleep(this->_sleeping);
+			_modelDelegate->noticeSleep(this->_sleeping/MAX_SLEEP);
 		}
 		else if(_state == STATE_BUY)
 		{

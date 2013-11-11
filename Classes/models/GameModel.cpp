@@ -6,7 +6,7 @@ namespace GAME_NAMESPACE
 
 	GameModel::GameModel()
 		:_currScript(NULL)
-		,_currBeauty(0)
+		,_currBeauty(-1)
 	{
 		_userBeautyData[0].gainHearts = 0;
 
@@ -92,9 +92,11 @@ namespace GAME_NAMESPACE
 
 	void GameModel::loadSave()
 	{
-		//CCData *data = CCUserDefault::sharedUserDefault()->setIntegerForKey()
+		//CCData *data = CCUserDefault::sharedUserDefault()->setIntegerForKey();
+		//string path = CCFileUtils::sharedFileUtils()->getWritablePath() + string("gamesave");
+
 		//this->_currBeauty = -1;
-		//if( data != NULL )
+		//if( true )
 		//{
 		//	unsigned char* bytes = data->getBytes();
 		//	for(int i = 0; i<REAL_BEAUTY_NUM; i++)
@@ -106,20 +108,61 @@ namespace GAME_NAMESPACE
 		//			this->_currBeauty = i - 1;
 		//		}
 		//	}
-		//}
+		
+
+		std::string path = CCFileUtils::sharedFileUtils()->getWritablePath() + std::string("gamesave");
+		FILE* file = fopen(path.c_str(), "r");
+
+		if (file) 
+		{
+			char buf[REAL_BEAUTY_NUM];
+			//fseek(file, 0, SEEK_END);
+			int len = REAL_BEAUTY_NUM;//ftell(file);
+			//rewind(file);
+			int rLen = fread(buf, sizeof(char), sizeof(char)*len, file);
+			fclose(file);
+
+			for(int i = 0; i<REAL_BEAUTY_NUM; i++)
+			{
+				int hearts =  (int)buf[i] - 2;
+				this->_userBeautyData[i].gainHearts = hearts;
+				if( hearts == -1 && _currBeauty < 0 )
+				{
+					this->_currBeauty = i - 1;
+				}
+			}
+		}
 	}
 
 	void GameModel::saveGame()
 	{
+		std::string path = CCFileUtils::sharedFileUtils()->getWritablePath() + std::string("gamesave");
+		FILE* file = fopen(path.c_str(), "w");
+		if (file) 
+		{
+			char pContent[REAL_BEAUTY_NUM+1];
+			for( int i = 0; i<REAL_BEAUTY_NUM; i++ )
+			{
+				int valueHearts = _userBeautyData[i].gainHearts;
+				char value = valueHearts + 2;
+				pContent[i] = value;
+			}
+			pContent[REAL_BEAUTY_NUM] = 0;
+			fputs(pContent, file);
+			fclose(file);  
+		}  
+		else  
+			CCLOG("save file error.");  
+
 		//return;
-		//unsigned char data[REAL_BEAUTY_NUM];
-		//for( int i = 0; i<REAL_BEAUTY_NUM; i++ )
-		//{
-		//	int valueHearts = _userBeautyData[i].gainHearts;
-		//	unsigned char value = valueHearts<0?255:valueHearts;
-		//	data[i] = value;
-		//}
-		//UserDefault::getInstance()->setDataForKey("save0", Data::create(data,REAL_BEAUTY_NUM));
+		/*unsigned char data[REAL_BEAUTY_NUM];
+		for( int i = 0; i<REAL_BEAUTY_NUM; i++ )
+		{
+		int valueHearts = _userBeautyData[i].gainHearts;
+		unsigned char value = valueHearts<0?255:valueHearts;
+		data[i] = value;
+		}
+		UserDefault::getInstance()->setDataForKey("save0", Data::create(data,REAL_BEAUTY_NUM));*/
 	}
 
 	void GameModel::setCurrBeauty( int index )

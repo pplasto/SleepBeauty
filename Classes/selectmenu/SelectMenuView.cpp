@@ -60,7 +60,7 @@ bool SelectMenuView::init()
 	scrollView->setPosition(CCPoint( 0, GAME_HEIGHT/8 ));
 	scrollView->setName("scrollView");
 
-	UILayout* widgetBeautyCard = static_cast<UILayout*>(UIHelper::instance()->createWidgetFromJsonFile("BeautyCard.ExportJson"));
+	UILayout* widgetBeautyCard = (UILayout*)GUIReader::shareReader()->widgetFromJsonFile("BeautyCard.ExportJson");
 
 	for( int i = 0; i < MAX_BEAUTY_NUM; i++ )
 	{
@@ -100,7 +100,7 @@ bool SelectMenuView::init()
 	this->addWidget( scrollView );
 	
 	// bottom 
-	UIWidget* bottomWidget = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("SelectUI.ExportJson");
+	UIWidget* bottomWidget = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("SelectUI.ExportJson");
 	bottomWidget->setName("bottomUIWidget");
 	this->addWidget( bottomWidget );
 
@@ -115,11 +115,11 @@ bool SelectMenuView::init()
 	button_seal->setPressedActionEnabled(true);
 
 	// Evil Mask panel
-	_panelEvil = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelEvil.ExportJson");
+	_panelEvil = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelEvil.ExportJson");
 	_panelEvil->retain();
 
 	// unlock panel
-	_panelUnlock = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelSelectLock.ExportJson");
+	_panelUnlock = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelSelectLock.ExportJson");
 	_panelUnlock->retain();
 
 	return true;

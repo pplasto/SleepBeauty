@@ -101,7 +101,8 @@ AppDelegate::~AppDelegate()
 	GameModel::destoryInstance();
 
 	//// cocostdio
-	UIHelper::purgeUIHelper();
+	//UIHelper::purgeUIHelper();
+	SceneReader::sharedSceneReader()->purgeSceneReader();
 	GUIReader::purgeGUIReader();
 	ActionManager::purgeActionManager();
 	//CCActionManager::
@@ -118,7 +119,7 @@ AppDelegate::~AppDelegate()
 	//
 	DictionaryHelper::purgeDictionaryHelper();
 	SceneReader::sharedSceneReader()->purgeSceneReader();
-	CCUIHELPER->purgeUIHelper();
+	//CCUIHELPER->purgeUIHelper();
 }
 
 bool AppDelegate::applicationDidFinishLaunching() 
@@ -136,7 +137,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	eglView->setDesignResolutionSize(320, 480, kResolutionShowAll);
 	
     // turn on display FPS
-    director->setDisplayStats(true);
+    //director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -176,12 +177,12 @@ void AppDelegate::applicationWillEnterForeground()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 bool ispre_exit =false;
 extern "C" {
-	void Java_com_pplasto_dreambeauty_DreamBeauty_nativecloseApp(JNIEnv*  env, jobject thiz)
+	void Java_com_goodgame_sleepBeauty_sleepBeauty_nativecloseApp(JNIEnv*  env, jobject thiz)
 	{
 		ispre_exit =false;
 		CCDirector::sharedDirector()->end();
 	}
-	void Java_com_pplasto_dreambeauty_DreamBeauty_nativecancleCloseApp(JNIEnv*  env, jobject thiz)
+	void Java_com_goodgame_sleepBeauty_sleepBeauty_nativecancleCloseApp(JNIEnv*  env, jobject thiz)
 	{
 		ispre_exit =false;
 	}

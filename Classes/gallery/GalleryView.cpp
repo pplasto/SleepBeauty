@@ -15,7 +15,7 @@ bool GalleryView::init()
 {
 	if(UILayer::init())
 	{
-		_uiGallery = cocos2d::extension::UIHelper::instance()->createWidgetFromJsonFile("PanelGallery.ExportJson");
+		_uiGallery = (UIWidget*)GUIReader::shareReader()->widgetFromJsonFile("PanelGallery.ExportJson");
 
 		//
 		_btnBack = static_cast<UIButton*>(_uiGallery->getChildByName("Button_PanelGallery_top_1"));
